@@ -16,12 +16,12 @@
 
 OE_USER="odoo"
 OE_HOME="/$OE_USER"
-OE_HOME_EXT="/$OE_USER/${OE_USER}-server"
+OE_HOME_EXT="/$OE_USER/${OE_USER}16"
 # The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 # Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
 # Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
-OE_PORT="8069"
+OE_PORT="8016"
 # Choose the Odoo version which you want to install. For example: 16.0, 15.0, 14.0 or saas-22. When using 'master' the master version will be installed.
 # IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 16.0
 OE_VERSION="16.0"
@@ -30,20 +30,20 @@ IS_ENTERPRISE="False"
 # Installs postgreSQL V14 instead of defaults (e.g V12 for Ubuntu 20/22) - this improves performance
 INSTALL_POSTGRESQL_FOURTEEN="True"
 # Set this to True if you want to install Nginx!
-INSTALL_NGINX="False"
+INSTALL_NGINX="True"
 # Set the superadmin password - if GENERATE_RANDOM_PASSWORD is set to "True" we will automatically generate a random password, otherwise we use this one
 OE_SUPERADMIN="admin"
 # Set to "True" to generate a random password, "False" to use the variable in OE_SUPERADMIN
 GENERATE_RANDOM_PASSWORD="True"
-OE_CONFIG="${OE_USER}-server"
+OE_CONFIG="${OE_USER}16"
 # Set the website name
-WEBSITE_NAME="_"
+WEBSITE_NAME="demo16.ecodigitus.net"
 # Set the default Odoo longpolling port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 LONGPOLLING_PORT="8072"
 # Set to "True" to install certbot and have ssl enabled, "False" to use http
 ENABLE_SSL="True"
 # Provide Email to register ssl certificate
-ADMIN_EMAIL="odoo@example.com"
+ADMIN_EMAIL="admin@ecodigitus.com"
 ##
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
@@ -388,7 +388,7 @@ fi
 # Enable ssl with certbot
 #--------------------------------------------------
 
-if [ $INSTALL_NGINX = "True" ] && [ $ENABLE_SSL = "True" ] && [ $ADMIN_EMAIL != "odoo@example.com" ]  && [ $WEBSITE_NAME != "_" ];then
+if [ $INSTALL_NGINX = "True" ] && [ $ENABLE_SSL = "True" ] && [ $ADMIN_EMAIL != "admin@ecodigitus.com" ]  && [ $WEBSITE_NAME != "demo16.ecodigitus.net" ];then
   sudo apt-get update -y
   sudo apt install snapd -y
   sudo snap install core; snap refresh core
@@ -399,10 +399,10 @@ if [ $INSTALL_NGINX = "True" ] && [ $ENABLE_SSL = "True" ] && [ $ADMIN_EMAIL != 
   echo "SSL/HTTPS is enabled!"
 else
   echo "SSL/HTTPS isn't enabled due to choice of the user or because of a misconfiguration!"
-  if $ADMIN_EMAIL = "odoo@example.com";then 
+  if $ADMIN_EMAIL = "admin@ecodigitus.com";then 
     echo "Certbot does not support registering odoo@example.com. You should use real e-mail address."
   fi
-  if $WEBSITE_NAME = "_";then
+  if $WEBSITE_NAME = "demo16.ecodigitus.net";then
     echo "Website name is set as _. Cannot obtain SSL Certificate for _. You should use real website address."
   fi
 fi
